@@ -1,0 +1,140 @@
+global !p
+def math():
+    return int(vim.eval('vimtex#syntax#in_mathzone()')) > 0
+#def math():
+#    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    return x != '0' and x != '0'
+
+endglobal
+
+priority 0 
+snippet h1 "Heading 1" bA
+#$0
+endsnippet
+
+priority 0 
+snippet h2 "Heading 2" bA
+##$0
+endsnippet
+
+priority 0 
+snippet h3 "Heading 3" bA
+###$0
+endsnippet
+
+priority 0 
+snippet h4 "Heading 4" bA
+####$0
+endsnippet
+
+priority 0 
+snippet h5 "Heading 5" bA
+#####$0
+endsnippet
+
+priority 0 
+snippet h6 "Heading 6" bA
+######$0
+endsnippet
+
+priority 0
+snippet * "Italics *" w
+*$1* $0
+endsnippet
+
+priority 0
+snippet _ "Italics _" w
+_$1_ $0
+endsnippet
+
+priority 0
+snippet ** "Bold **" w
+**$1** $0
+endsnippet
+
+priority 0 
+snippet __ "Bold __" w
+__$1__ $0
+endsnippet
+
+priority 0 
+snippet imi "Image from internet" w
+![$3|$2]($1) $0
+endsnippet
+
+priority 0 
+snippet iml "Image from local" w
+![[$2|$1]] $0
+endsnippet
+
+priority 0 
+snippet bl "Backlink" w
+[[$1]] $0
+endsnippet
+
+priority 0 
+snippet code "Block Code" w
+\`\`\`
+$1
+\`\`\`
+$0
+endsnippet
+
+priority 0 
+snippet note "Block Note" w
+\`\`\`ad-note
+title: $3
+collapse: $2
+$1
+\`\`\`
+$0
+endsnippet
+
+priority 0 
+snippet question "Block Question" w
+\`\`\`ad-question
+title: $3
+collapse: $2
+$1
+\`\`\`
+$0
+endsnippet
+
+priority 0 
+snippet ex "Block Example" w
+\`\`\`ad-example
+title: $3
+collapse: $2
+$1
+\`\`\`
+$0
+endsnippet
+
+priority 0
+snippet <u "Underline" iA
+<u>$1</u> $0
+endsnippet
+
+priority 0
+snippet mk "Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+priority 0
+snippet mK "Math" wA
+$$
+${1}
+$$
+$2
+endsnippet
