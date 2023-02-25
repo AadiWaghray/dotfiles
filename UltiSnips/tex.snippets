@@ -16,6 +16,11 @@ snippet beg "begin{} / end{}" bA
 endsnippet
 
 priority 0
+snippet qs "question" biA
+\qs{$1}{$2}$0
+endsnippet
+
+priority 0
 snippet split "split equation" bA
 \begin{equation*}
 \begin{split}
@@ -294,12 +299,14 @@ endsnippet
 
 ####Don't Understand
 context "math()"
+priority 0
 snippet "(\\?\w+)(,\.|\.,)" "Vector postfix" riA
 \vec{`!p snip.rv=match.group(1)`}
 endsnippet
 
 context "math()"
-snippet pmat "paranthesis matrix" wiA
+priority 0
+snippet pmat "paranthesis matrix" iA
 \begin{pmatrix}
 $1
 \end{bmatrix}
@@ -307,9 +314,16 @@ $0
 endsnippet
 
 context "math()"
-snippet bmat "bracket matrix" wiA
+priority 0
+snippet bmat "bracket matrix" iA
 \begin{bmatrix}
 $1
 \end{bmatrix}
 $0
+endsnippet
+
+context "math()"
+priority 0
+snippet int "integral" i
+\int_{$1}^{$2} $3 \,$0
 endsnippet
