@@ -29,7 +29,7 @@ set wildmenu
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set conceallevel=1
+set conceallevel=2
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 tnoremap <Esc> <C-\><C-n>
 
