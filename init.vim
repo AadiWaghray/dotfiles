@@ -24,13 +24,13 @@ call plug#end()
 
 set termguicolors
 set number
-syntax on
+syntax enable
 set wildmenu
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set conceallevel=0
-let g:vimtex_syntax_conceal_default=0
+set conceallevel=2
+let g:vimtex_syntax_conceal_disable=1
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 tnoremap <Esc> <C-\><C-n>
 
