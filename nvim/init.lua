@@ -87,6 +87,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.mouse = a
 vim.opt.autoindent = true
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.hidden = true
 vim.opt.smartindent = true
