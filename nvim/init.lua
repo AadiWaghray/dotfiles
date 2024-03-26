@@ -25,6 +25,7 @@ require("lazy").setup({
 	-- Inline Latex
 	{
 		'jbyuki/nabla.nvim',
+		ft = {"markdown", "latex"},
 		init = function()
 			vim.keymap.set('n', '<leader>pd', require("nabla").disable_virt, {buffer=0})
 			vim.keymap.set('n', '<leader>pe', require("nabla").enable_virt, {buffer=0})
@@ -46,6 +47,7 @@ require("lazy").setup({
 	-- Latex
 	{
 		'lervag/vimtex',
+		ft = "latex",
 		init = function()
 			vim.g.vimtex_view_method = 'skim'
 			vim.g.vimtex_complete_enable = 1
@@ -70,13 +72,12 @@ require("lazy").setup({
 	-- Obsidian
 	-- 'epwalsh/obsidian.nvim'
 	-- Auto Completion
-	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-nvim-lsp',
+	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-path',
 	-- TODO: Make sure these can be removed
 	'SirVer/ultisnips',
-	'quangnguyen30192/cmp-nvim-ultisnips',
 	-- Git Wrapper
 	'tpope/vim-fugitive',
 })
