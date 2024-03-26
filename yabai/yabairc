@@ -1,3 +1,5 @@
+# Deals with Sketchy Bar
+yabai -m config external_bar all:32:0
 # bsp stack float
 yabai -m config layout bsp
 yabai -m config window_placement second_child
