@@ -69,7 +69,7 @@ require("lazy").setup({
 	-- Latex
 	{
 		'lervag/vimtex',
-		ft = "latex",
+		ft = "tex",
 		init = function()
 			vim.g.vimtex_view_method = 'skim'
 			vim.g.vimtex_complete_enable = 1
