@@ -1,4 +1,4 @@
 ./nvim/LSP
-./gh/hosts.yml
-./gtk-2.0
-./Autodesk
+/gh/hosts.yml
+/gtk-2.0
+/Autodesk
