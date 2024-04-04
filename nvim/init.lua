@@ -4,9 +4,7 @@ require("lazy").setup({
 	-- Core Functionality
 	'nvim-lua/plenary.nvim',
 	'neovim/nvim-lspconfig', -- Helps manage and connect to different LS
-	-- VimWiki
 	{
-		'vimwiki/vimwiki',
 		"lukas-reineke/headlines.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true, -- or `opts = {}`
