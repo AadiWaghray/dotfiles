@@ -7,6 +7,15 @@ require("lazy").setup({
 	-- VimWiki
 	{
 		'vimwiki/vimwiki',
+	-- Otter: embbeded highlighting
+	{
+		'jmbuhr/otter.nvim',
+		dependencies = {
+			'hrsh7th/nvim-cmp', -- optional, for completion
+			'neovim/nvim-lspconfig',
+			'nvim-treesitter/nvim-treesitter'
+		}
+	},
 		init = function()
 			vim.g.vimwiki_list = {{path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}}
 			vim.g.vimwiki_global_ext = 0
@@ -142,6 +151,7 @@ cmp.setup({
     	['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
+		{ name = 'otter' },
 		{ name = 'nvim_lsp' },
     	{ name = 'luasnip' },
       	--{ name = 'ultisnips' },
