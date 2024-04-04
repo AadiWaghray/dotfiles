@@ -119,6 +119,21 @@ vim.opt.termguicolors = true
 vim.opt.syntax = 'on'
 vim.opt.conceallevel = 2
 
+-- KeyMaps
+vim.keymap.set("v", "[e", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "]e", ":m '>+1<CR>gv=gv")
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+
+-- ColorScheme
 vim.cmd 'colorscheme tokyonight'
 --vim.cmd 'colorscheme nightfox'
 --vim.cmd 'colorscheme dracula-soft'
