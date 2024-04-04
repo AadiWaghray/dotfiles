@@ -210,15 +210,41 @@ end
 
 require('lspconfig').rust_analyzer.setup {
 	-- Server-specific settings. See `:help lspconfig-setup`
-    capabilities = capabilities,
+    --capabilities = capabilities,
 	on_attach = on_attach,
-	settings = {
-		['rust-analyzer'] = {
-			cargo = {
-				allFeatures = true,
+    settings = {
+        ["rust-analyzer"] = {
+			checkOnSave = {
+				command = "clippy",
 			},
-		},
-	},
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+}
+
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
 }
 
 require'nvim-treesitter.configs'.setup {
