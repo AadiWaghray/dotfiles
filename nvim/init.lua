@@ -18,12 +18,23 @@ require("lazy").setup({
 			'nvim-treesitter/nvim-treesitter'
 		}
 	},
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = function() vim.fn["mkdp#util#install"]() end,
 		init = function()
-			vim.g.vimwiki_list = {{path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}}
-			vim.g.vimwiki_global_ext = 0
-			--vim.g.vimwiki_option_auto_tags = {{path: '~/vimwiki/', auto_tags: 0}}
-			--vim.g.vimwiki_tag_format = {{pre: '\(^[ -]*tags\s*: .*\)\@<=', pre_mark: '@', post_mark: '', sep: '>><<'}}
+			vim.g.mkdp_auto_start = 1
+			vim.cmd(
+				[[
+				function OpenMarkdownPreview (url)
+				  execute "silent ! open -na 'Google Chrome' --args --new-window " . a:url
+				endfunction
+				]]
+				)
+			vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
 		end,
+		
 	},
 	-- Lualine
 	{
