@@ -230,6 +230,18 @@ for _, LSP in ipairs(LSP_Server_List) do
 	}
 end
 
+require('lspconfig').gopls.setup({
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
+})
+
 require('lspconfig').rust_analyzer.setup {
 	-- Server-specific settings. See `:help lspconfig-setup`
     --capabilities = capabilities,
@@ -271,7 +283,7 @@ require'lspconfig'.cssls.setup {
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "markdown", "query", "python", "javascript"},
+  ensure_installed = { "c", "lua", "go", "vim", "markdown", "query", "python", "javascript"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
