@@ -9,6 +9,13 @@ require("lazy").setup({
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true, -- or `opts = {}`
     	},
+	-- Wiki
+	{
+		'lervag/wiki.vim',
+		init = function()
+			vim.g.wiki_root = '~/Documents/Vault'
+		end,
+	},
 	-- Otter: embbeded highlighting
 	{
 		'jmbuhr/otter.nvim',
