@@ -1,0 +1,8 @@
+If keys stop working on skhd, run skhd -V to see reason. 
+If reason is "secure keyboard entry," run 
+ioreg -l -w 0 \
+    | perl -nle 'print $1 if /"kCGSSessionSecureInputPID"=(\d+)/' \
+    | uniq \
+    | xargs -I{} ps -p {} -o comm=
+After identifying process, do what is needed to deal with the process.
+Dealing with loginwindow -> logout and log back in. 
