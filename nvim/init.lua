@@ -206,8 +206,8 @@ cmp.setup.cmdline({ '/', '?' }, {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local LSP_Server_List = {'pyright', 'jdtls', 'texlab', 'clangd', 'sqlls', 'tsserver'}
 -- Set up lspconfig.
-vim.keymap.set('n', '<leader>dj', vim.diagnostic.goto_next, {buffer=0})
-vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_prev, {buffer=0})
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {buffer=0})
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {buffer=0})
 vim.keymap.set('n', '<leader>dt', '<cmd>Telescope diagnostics<cr>', {buffer=0})
 
 
