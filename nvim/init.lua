@@ -115,7 +115,7 @@ require("lazy").setup({
 		"lukas-reineke/headlines.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true, -- or `opts = {}`
-    	},
+    },
 	-- Wiki
 	{
 		'lervag/wiki.vim',
@@ -134,11 +134,13 @@ require("lazy").setup({
 	},
 	{
 		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
 		build = function() vim.fn["mkdp#util#install"]() end,
 		init = function()
-			vim.g.mkdp_auto_start = 1
+			vim.g.mkdp_theme = 'light'
+			vim.cmd("nmap <leader>mdo <Plug>MarkdownPreview")
+			vim.cmd("nmap <leader>mds <Plug>MarkdownPreviewStop")
+			vim.cmd("nmap <leader>md <Plug>MarkdownPreviewToggle")
 			vim.cmd(
 				[[
 				function OpenMarkdownPreview (url)
