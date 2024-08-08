@@ -248,6 +248,18 @@ vim.keymap.set("v", "<leader>y", "\"+y")
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 
+local ls = require("luasnip")
+vim.keymap.set({"i"}, "<C-Space>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-_>", function() ls.jump(1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-\\>", function() ls.jump(-1) end, {silent = true})
+vim.keymap.set("n", "<leader>s", "<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<CR>", {silent = true})
+
+vim.keymap.set({"i", "s"}, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, {silent = true})
+
 -- ColorScheme
 vim.cmd 'colorscheme tokyonight'
 --vim.cmd 'colorscheme nightfox'
