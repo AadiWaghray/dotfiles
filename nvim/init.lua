@@ -13,9 +13,61 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup({
 	-- Telescope
-	'nvim-telescope/telescope.nvim',
+	{
+		'nvim-telescope/telescope.nvim', --TODO: Checkout types of pickers and previewers and layout/ theme GOD so much documentation
+		tag = "0.1.8",
+		branch = "0.1.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"BurntSushi/ripgrep",
+			"nvim-telescope/telescope-fzf-native.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"neovim/nvim-lspconfig",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = function() 
+			local builtin = require('telescope.builtin')
+
+			return {
+				defaults = {
+					mappings = {
+						i = {
+							["<C-h>"] = "which_key",
+							["<leader>ff"] = builtin.find_files,
+							["<leader>ffg"] = builtin.live_grep,
+							["<leader>ffb"] = builtin.buffers,
+							["<leader>ffh"] = builtin.help_tags,
+							["<leader>ffm"] = builtin.marks,
+							["<leader>ffq"] = builtin.quickfix,
+							["<leader>ffm"] = builtin.man_pages,
+
+							["<leader>gb"] = builtin.git_branches,
+							["<leader>gs"] = builtin.git_status,
+						}
+					}
+				},
+				pickers = {
+					-- picker_name = {
+					--   picker_config_key = value,
+					--   ...
+					-- }
+				},
+				extensions = {
+					-- extension_name = {
+					--   extension_config_key = value,
+					-- }
+					-- telescope-frecency.nvim
+					-- telescope-zotero.nvim
+					-- telescope-dap.nvim
+					-- telescope-zoxide
+				}
+			}
+		end
+		,
+	},
 	-- Core Functionality
 	'nvim-lua/plenary.nvim',
 	'neovim/nvim-lspconfig', -- Helps manage and connect to different LS
