@@ -381,17 +381,9 @@ require('lspconfig').rust_analyzer.setup {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.cssls.setup {
-  capabilities = capabilities,
-}
-
-require'lspconfig'.cssls.setup {
-  capabilities = capabilities,
-}
-
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "go", "vim", "markdown", "query", "python", "javascript"},
+  ensure_installed = { "c", "lua", "go", "asm", "vim", "markdown", "query", "python", "javascript"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -429,6 +421,41 @@ require'nvim-treesitter.configs'.setup {
   indent = {
 	  enable = true,
   },
+	 textobjects = {
+        move = {
+            enable = true,
+            set_jumps = false, -- you can change this if you want.
+            goto_next_start = {
+                --- ... other keymaps
+                ["]c"] = { query = "@code_cell.inner", desc = "next code block" },
+            },
+            goto_previous_start = {
+                --- ... other keymaps
+                ["[c"] = { query = "@code_cell.inner", desc = "previous code block" },
+            },
+        },
+        select = {
+            enable = true,
+            lookahead = true, -- you can change this if you want
+            keymaps = {
+                --- ... other keymaps
+                ["ic"] = { query = "@code_cell.inner", desc = "in block" },
+                ["ac"] = { query = "@code_cell.outer", desc = "around block" },
+            },
+        },
+        swap = { -- Swap only works with code blocks that are under the same
+                 -- markdown header
+            enable = true,
+            swap_next = {
+                --- ... other keymap
+                ["<leader>sbl"] = "@code_cell.outer",
+            },
+            swap_previous = {
+                --- ... other keymap
+                ["<leader>sbh"] = "@code_cell.outer",
+            },
+        },
+    }
 }
 
 --[[
