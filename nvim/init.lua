@@ -179,10 +179,10 @@ require("lazy").setup({
 			})
 		end,	
 	},
-	-- Fuzzy Finder
-	'nvim-telescope/telescope.nvim',
-	'lewis6991/gitsigns.nvim',
-	-- Latex
+	{
+		'lewis6991/gitsigns.nvim',
+		--TODO: Move setup to here
+	},
 	{
 		'lervag/vimtex',
 		ft = "tex",
@@ -192,32 +192,31 @@ require("lazy").setup({
 			vim.g.vimtex_view_skim_sync = 1
 		end,
 	},
-	-- Browse
+	--[[
 	{
 		'lalitmee/browse.nvim',
 		dependencies = { "nvim-telescope/telescope.nvim" },
 	},
-	-- Snippets
-	'L3MON4D3/LuaSnip',
+	--]]
+	{
+		"L3MON4D3/LuaSnip",
+		build = "make install_jsregexp"
+	},
 	-- Color Themes
 	'Mofiqul/dracula.nvim',
 	'EdenEast/nightfox.nvim',
 	'folke/tokyonight.nvim',
 	-- Treesitter
 	'nvim-treesitter/nvim-treesitter',
-	-- Linter
-	'mfussenegger/nvim-lint',
-	-- Obsidian
-	-- 'epwalsh/obsidian.nvim'
+	'nvim-treesitter/nvim-treesitter-textobjects',
 	-- Auto Completion
 	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-path',
-	-- TODO: Make sure these can be removed
-	'SirVer/ultisnips',
-	-- Git Wrapper
-	'tpope/vim-fugitive',
+	{
+		'tpope/vim-fugitive',
+	},
 })
 
 -- Default Settings
@@ -432,6 +431,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+--[[
 require('browse').setup({
   provider = "google", -- duckduckgo, bing
 
@@ -475,8 +475,9 @@ end)
 command("MdnSearch", function()
   browse.mdn.search()
 end)
-
-require('gitsigns').setup {
+--]]
+--
+require('gitsigns').setup {--TODO: Move to lazy
     signs = {
 	add          = { text = '│' },
 	change       = { text = '│' },
@@ -515,9 +516,6 @@ require('gitsigns').setup {
 	row = 0,
 	col = 1
     },
-    yadm = {
-		enable = false
-    },
   	on_attach = function(bufnr)
     	local gs = package.loaded.gitsigns
 
@@ -545,11 +543,11 @@ require('gitsigns').setup {
 		map('n', '<leader>hr', gs.reset_hunk)
 		map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
 		map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-		map('n', '<leader>hS', gs.stage_buffer)
+		map('n', '<leader>bs', gs.stage_buffer)
 		map('n', '<leader>hu', gs.undo_stage_hunk)
-		map('n', '<leader>hR', gs.reset_buffer)
+		map('n', '<leader>br', gs.reset_buffer)
 		map('n', '<leader>hp', gs.preview_hunk)
-		map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+		map('n', '<leader>lb', function() gs.blame_line{full=true} end)
 		map('n', '<leader>tb', gs.toggle_current_line_blame)
 		map('n', '<leader>hd', gs.diffthis)
 		map('n', '<leader>hD', function() gs.diffthis('~') end)
