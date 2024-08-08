@@ -69,8 +69,48 @@ require("lazy").setup({
 		,
 	},
 	-- Core Functionality
-	'nvim-lua/plenary.nvim',
-	'neovim/nvim-lspconfig', -- Helps manage and connect to different LS
+	{
+		'nvim-lua/plenary.nvim', --Check later 
+		lazy = true
+	},
+	--[[
+	{
+		'mfussenegger/nvim-jdtls', --Check later
+		lazy = true,
+	},
+	--]]
+	'neovim/nvim-lspconfig',
+	--[[
+	'edluffy/hologram.nvim',--Check later
+	{
+		"benlubas/molten-nvim",
+		version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+		build = ":UpdateRemotePlugins",
+		init = function()
+			vim.g.molten_output_win_max_height = 20
+			vim.g.molten_auto_open_output = false
+			vim.g.molten_wrap_output = true
+			vim.g.molten_virt_text_output = true
+			vim.g.molten_virt_lines_off_by_1 = true
+
+			vim.keymap.set("n", "<localleader>mi", ":MoltenInit<CR>",{ silent = true, desc = "Initialize the plugin" })
+			vim.keymap.set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>",{ silent = true, desc = "run operator selection" })
+			vim.keymap.set("n", "<localleader>rl", ":MoltenEvaluateLine<CR>",{ silent = true, desc = "evaluate line" })
+			vim.keymap.set("n", "<localleader>rr", ":MoltenReevaluateCell<CR>",{ silent = true, desc = "re-evaluate cell" })
+			vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv",{ silent = true, desc = "evaluate visual selection" })
+			vim.keymap.set("n", "<localleader>ri", ":MoltenInterrupt<CR>",{ silent = true, desc = "" })
+			vim.keymap.set("n", "<localleader>ro", ":MoltenOpenInBrowser<CR>",{ silent = true, desc = "" })
+			vim.keymap.set("n", "<localleader>re", ":noautocmd MoltenEnterOutput<CR>",{ silent = true, desc = "" })
+			vim.keymap.set("n", "<localleader>rh", ":MoltenHideOutput<CR>",{ silent = true, desc = "" })
+		end,
+	},
+	{
+		"GCBallesteros/jupytext.nvim",
+		config = true,
+		-- Depending on your nvim distro or config you may need to make the loading not lazy
+		-- lazy=false,
+	},
+	--]]
 	{
 		"lukas-reineke/headlines.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
