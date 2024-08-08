@@ -37,12 +37,12 @@ require("lazy").setup({
 						i = {
 							["<C-h>"] = "which_key",
 							["<leader>ff"] = builtin.find_files,
-							["<leader>ffg"] = builtin.live_grep,
-							["<leader>ffb"] = builtin.buffers,
-							["<leader>ffh"] = builtin.help_tags,
-							["<leader>ffm"] = builtin.marks,
-							["<leader>ffq"] = builtin.quickfix,
-							["<leader>ffm"] = builtin.man_pages,
+							["<leader>fg"] = builtin.live_grep,
+							["<leader>fbf"] = builtin.buffers,
+							["<leader>fh"] = builtin.help_tags,
+							["<leader>fm"] = builtin.marks,
+							["<leader>fqf"] = builtin.quickfix,
+							["<leader>mp"] = builtin.man_pages,
 
 							["<leader>gb"] = builtin.git_branches,
 							["<leader>gs"] = builtin.git_status,
