@@ -559,12 +559,6 @@ require('gitsigns').setup {--TODO: Move to lazy
 }
 
 
-require('lint').linters_by_ft = {
-	markdown = {'vale',},
-	python = {'pylint',},
-	javascript = {'eslint',},
-}
-
 --vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 --	callback = function()
 --		require("lint").try_lint()
@@ -671,3 +665,22 @@ vim.diagnostic.config({
     update_in_insert = true,
     severity_sort = false,
 })
+
+--[[
+local config = {
+    cmd = {'~/.config/nvim/jdt-language-server-latest/bin/jdtls'},
+    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+}
+--]]
+
+--[[
+require('hologram').setup{
+    auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+}
+
+require("jupytext").setup({
+    style = "markdown",
+    output_extension = "md",
+    force_ft = "markdown",
+})
+--]]
