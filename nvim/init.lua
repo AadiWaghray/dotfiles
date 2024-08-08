@@ -324,12 +324,12 @@ cmp.setup.cmdline({ '/', '?' }, {
 })	
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local LSP_Server_List = {'pyright', 'jdtls', 'texlab', 'clangd', 'sqlls', 'tsserver'}
+local LSP_Server_List = {'pyright', 'texlab', 'clangd', 'sqlls', 'tsserver'}
 -- Set up lspconfig.
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {buffer=0})
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {buffer=0})
+vim.keymap.set('n', '<leader>dl', vim.diagnostic.setqflist, {buffer=0})
 vim.keymap.set('n', '<leader>dt', '<cmd>Telescope diagnostics<cr>', {buffer=0})
-
 
 local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, {buffer=0})
@@ -337,40 +337,25 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {buffer=0})
 	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {buffer=0})
 	vim.keymap.set('n', '<leader>fb', vim.lsp.buf.format, {buffer=0})
-	vim.keymap.set('n', '<leader>m', vim.lsp.buf.implementation(), {buffer=0})
-	vim.keymap.set('n', '<leader>td', vim.lsp.buf.type_definition(), {buffer=0})
-	require'completion'.on_attach(client)
-	vim.lsp.inlay_hint.enable(bufnr)
+	vim.keymap.set('n', '<leader>m', vim.lsp.buf.implementation, {buffer=0})
+	vim.keymap.set('n', '<leader>td', vim.lsp.buf.type_definition, {buffer=0})
+	vim.lsp.inlay_hint.enable(true)
 end
 
+lspconfig = require('lspconfig')
 for _, LSP in ipairs(LSP_Server_List) do
-	require('lspconfig')[LSP].setup{
+	lspconfig[LSP].setup{
     	capabilities = capabilities,
 		on_attach = on_attach,
 	}
 end
 
-require('lspconfig').gopls.setup({
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-      gofumpt = true,
-    },
-  },
-})
+lspconfig.gopls.setup({})
 
-require('lspconfig').rust_analyzer.setup {
-	-- Server-specific settings. See `:help lspconfig-setup`
-    --capabilities = capabilities,
-	on_attach = on_attach,
+lspconfig.rust_analyzer.setup({
+    on_attach = on_attach,
     settings = {
         ["rust-analyzer"] = {
-			checkOnSave = {
-				command = "clippy",
-			},
             imports = {
                 granularity = {
                     group = "module",
@@ -387,7 +372,7 @@ require('lspconfig').rust_analyzer.setup {
             },
         }
     }
-}
+})
 
 --Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
