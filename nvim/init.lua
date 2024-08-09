@@ -28,26 +28,67 @@ require("lazy").setup({
 			"neovim/nvim-lspconfig",
 			"nvim-tree/nvim-web-devicons",
 		},
+		keys = function()
+			local builtin = require('telescope.builtin')
+			local telescope = require('telescope')
+
+			return {
+				{
+					"<C-h>",
+					function()
+						telescope.which_key()
+					end
+				},
+				{
+					"<leader>ff",
+					function()
+						builtin.find_files()
+					end
+				},
+				{
+					"<leader>fg",
+					function()
+						builtin.live_grep()
+					end
+				},
+				{
+					"<leader>buf",
+					function()
+						builtin.buffers()
+					end
+				},
+				{
+					"<leader>fh",
+					function()
+						builtin.help_tags()
+					end
+				},
+				{
+					"<leader>fm",
+					function()
+						builtin.marks()
+					end
+				},
+				{
+					"<leader>fgb",
+					function()
+						builtin.git_branch()
+					end
+				},
+				{
+					"<leader>fgs",
+					function()
+						builtin.git_status()
+					end
+				}
+
+			}
+		end,
 		opts = function() 
 			local builtin = require('telescope.builtin')
 
 			return {
 				defaults = {
-					mappings = {
-						i = {
-							["<C-h>"] = "which_key",
-							["<leader>ff"] = builtin.find_files,
-							["<leader>fg"] = builtin.live_grep,
-							["<leader>fbf"] = builtin.buffers,
-							["<leader>fh"] = builtin.help_tags,
-							["<leader>fm"] = builtin.marks,
-							["<leader>fqf"] = builtin.quickfix,
-							["<leader>mp"] = builtin.man_pages,
-
-							["<leader>gb"] = builtin.git_branches,
-							["<leader>gs"] = builtin.git_status,
-						}
-					}
 				},
 				pickers = {
 					-- picker_name = {
